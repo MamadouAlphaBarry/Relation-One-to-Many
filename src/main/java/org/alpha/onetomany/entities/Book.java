@@ -13,7 +13,10 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Array;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -42,5 +45,7 @@ public class Book {
      private LocalDateTime createdDate;
      @LastModifiedDate
     private LocalDateTime modifiedDate;
+     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+     private List<Chapter> chapters= new ArrayList<>();
     // Getters et Setters
 }
